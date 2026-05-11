@@ -47,7 +47,8 @@ with db._conn() as conn:
         email = s['xui_email']
         real_sub_id = sub_map.get(email, '')
         if real_sub_id:
-            new_link = f"https://m8vpn.ru/sub/{real_sub_id}"
+            domain = os.getenv("XUI_DOMAIN", "")
+            new_link = f"https://{domain}{os.getenv('XUI_SUB_PATH', '/')}{real_sub_id}"
             if s['sub_link'] != new_link:
                 db._execute(conn, "UPDATE subscriptions SET sub_link = %s WHERE id = %s",
                             (new_link, s['id']))
