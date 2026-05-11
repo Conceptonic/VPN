@@ -10,7 +10,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 BASE_URL = f"{XUI_HOST}:{XUI_PORT}{XUI_BASE_PATH}"
 session = requests.Session()
 session.verify = False
-session.headers.update({"Host": "..."})
+session.headers.update({"Host": os.getenv("XUI_DOMAIN", "")})
 
 _session_valid = False  # флаг что сессия авторизована
 
